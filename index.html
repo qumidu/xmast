@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marry Christmas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1511268011861-691ed210aae8') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .gift-button {
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff5733;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .gift-button:hover {
+            background-color: #e64e2e;
+        }
+
+        .gift-image {
+            display: none;
+            margin: 20px auto 0;
+            max-width: 90%;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: opacity 1s, transform 1s;
+        }
+
+        #desc {
+            display: none;
+            color: #fff;
+            margin: 10px auto 0;
+            font-size: 22px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #fff;
+            animation: typing 3s steps(30) 1s normal both;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="giftButton" class="gift-button" onclick="openGift(); toggleMusic();">Details</button>
+        <img id="giftImage" class="gift-image" src="./bill.jpg" alt="gift">
+        <span id="desc">HÀNG HÓA XUẤT XỨ RÕ RÀNG</span>
+    </div>
+
+    <audio id="christmasMusic" loop>
+        <source src="./christmas.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let isMusicPlaying = false;
+
+        function openGift() {
+            const giftImage = document.getElementById('giftImage');
+            const desc = document.getElementById('desc');
+            if (giftImage.style.display === 'block') {
+                giftImage.style.display = 'none';
+                desc.style.display = 'none';
+            } else {
+                giftImage.style.display = 'block';
+                setTimeout(() => {
+                    giftImage.style.opacity = 1;
+                    giftImage.style.transform = 'translateY(0)';
+                }, 10);
+                desc.style.display = 'inline-block';
+            }
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('christmasMusic');
+            const button = document.getElementById('giftButton');
+            if (isMusicPlaying) {
+                music.pause();
+                button.textContent = 'Details';
+            } else {
+                music.play();
+                button.textContent = 'Tắt nhạc';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+    </script>
+</body>
+</html>
